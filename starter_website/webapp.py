@@ -2,14 +2,22 @@ from flask import Flask, render_template
 from flask import request, redirect
 webapp = Flask(__name__)
 
-@webapp.route('/hello')
-def hello():
-    return "Hello!"
-
 @webapp.route('/')
 def index():
-    return "<p>hi</p>"
+    return render_template('index.html')
 
-@webapp.route('/home')
-def home():
-    return render_template('home.html', result = result)
+@webapp.route('/Games')
+def Games():
+    return render_template('Games.html')
+
+@webapp.route('/Openings')
+def Openings():
+    return render_template('Openings.html')
+
+@webapp.route('/Players')
+def Players():
+    return render_template('Players.html')
+
+@webapp.route('/Ratings')
+def Ratings():
+    return render_template('Ratings.html')
