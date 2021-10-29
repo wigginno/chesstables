@@ -1,0 +1,48 @@
+<html>
+<h3>Add new player:</h3>
+<form id="addplayer" action="/Players" method="post">
+    Player's name: <input type="text" name="player_name"><br>
+    Player's rating: <input type="text" name="rating_name"><br>
+    Favorite opening: <select name="favorite_opening"> 
+        <option value=""></option>
+    </select><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>
+
+<form id='filter_Players' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by favorite_opening </label>
+    <select id='favorite_opening_filter' name="favorite_opening"> 
+        <option value=""></option>
+    </select><br>
+    <input type="button" value="Filter" onclick="filterPlayersByFavoriteOpening()">
+</form>
+
+<form id='search_Players' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search player by name:</label>
+    <input id='player_name_search_string' type='text' name='player_name_search_string' value=''>
+    <input type="button" value="Search" onclick="searchPlayersByName()">
+</form>
+
+<h3>Players:</h3>
+<table border='1'>
+    <thead> 
+        <th>player_id</th> 
+        <th>player_name</th> 
+        <th>rating_name</th> 
+        <th>favorite_opening</th>
+    </thead> 
+    <tbody>
+        <tr> 
+            <td></td> 
+            <td></td> 
+            <td></td> 
+            <td></td> 
+            <td><button onclick="deletePlayer()">Delete</button></td>
+            <td><a href="/Players/">Update</a></td>
+        </tr>
+    </tbody> 
+</table> 
+</html>

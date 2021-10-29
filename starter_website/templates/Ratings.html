@@ -1,0 +1,23 @@
+<html>
+<h3>Add new custom rating:</h3>
+<form id="addrating" action="/Ratings" method="post">
+    Rating name: <input type="text" name="rating_name"><br>
+    </select><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>
+
+<h3>Ratings:</h3>
+<table border='1'>
+    <thead> 
+        <th>rating_name</th> 
+    </thead> 
+    <tbody>
+        <tr> 
+            <td></td> 
+            <td><button onclick="deleteRating()">Delete</button></td>
+            <td><a href="/Ratings/">Update</a></td>
+        </tr>
+    </tbody> 
+</table> 
+</html>

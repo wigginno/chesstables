@@ -1,0 +1,24 @@
+<html>
+<h3>Add new opening:</h3>
+<form id="addopening" action="/Openings" method="post">
+    Opening name: <input type="text" name="opening_name"><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>
+
+<h3>Openings:</h3>
+<table border='1'>
+    <thead> 
+        <th>opening_id</th> 
+        <th>opening_name</th> 
+    </thead> 
+    <tbody>
+        <tr> 
+            <td></td> 
+            <td></td>
+            <td><button onclick="deleteOpening()">Delete</button></td>
+            <td><a href="/Players/">Update</a></td>
+        </tr>
+    </tbody> 
+</table> 
+</html>

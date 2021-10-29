@@ -1,0 +1,53 @@
+<html>
+<h3>Add new game:</h3>
+<form id="addgame" action="/Games" method="post">
+    Black player's name: <input type="text" name="black_player"><br>
+    White player's name: <input type="text" name="white_player"><br>
+    Result: <select name="result">
+        <option value=""></option>
+    </select><br>
+    Opening: <select name="opening_id">
+        <option value=""></option>
+    </select><br>
+    <input type="submit" value="Submit">
+ </form>
+<br/>
+
+<form id='filter_games_by_opening' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by favorite_opening </label>
+    <select id='opening_filter' name="opening_id"> 
+        <option value=""></option>
+    </select><br>
+    <input type="button" value="Filter" onclick="filterGamesByOpening()">
+</form>
+
+<form id='search_games_by_player' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search game by player name:</label>
+    <input id='player_name_search_string' type='text' name='player_name_search_string' value=''>
+    <input type="button" value="Search" onclick="searchGamesByPlayerName()">
+</form>
+
+<h3>Games:</h3>
+<table border='1'>
+    <thead>
+        <th>game_id</th> 
+        <th>black_player</th> 
+        <th>white_player</th> 
+        <th>result</th>
+        <th>opening_id</th>
+    </thead> 
+    <tbody>
+        <tr> 
+            <td></td> 
+            <td></td> 
+            <td></td> 
+            <td></td>
+            <td></td>
+            <td><button onclick="deleteGame()">Delete</button></td>
+            <td><a href="/Games/">Update</a></td>
+        </tr>
+    </tbody> 
+</table> 
+</html>
