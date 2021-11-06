@@ -1,14 +1,25 @@
 <html>
-    <a href=/>Index</a>
+
+<!-- Bootstrap & JQuery -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <a style="font-size:30px" href=/>Index</a>
+    <a style="font-size:30px" href=Games>Games</a>
+    <a style="font-size:30px" href=Openings>Openings</a>
+    <a style="font-size:30px" href=Ratings>Ratings</a>
+
 <h3>Add new player:</h3>
-<form id="addplayer" action="/Players" method="post">
-    Player's name: <input type="text" name="player_name"><br>
-    Player's rating: <input type="text" name="rating_name"><br>
-    Favorite opening: <select name="favorite_opening"> 
+
+<p><form id="addplayer" action="/Players" method="post">
+<p>Player's name: <input type="text" name="player_name"><br></p>
+<p>Player's rating: <input type="text" name="rating_name"><br></p>
+<p>Favorite opening: <select name="favorite_opening"></p>
         <option value=""></option>
     </select><br>
-    <input type="submit" value="Submit">
- </form>
+<p><input type="submit" value="Submit"></p>
+ </form></p>
 <br/>
 
 <form id='filter_Players' action='' method=''>
@@ -17,7 +28,7 @@
     <select id='favorite_opening_filter' name="favorite_opening"> 
         <option value=""></option>
     </select><br>
-    <input type="button" value="Filter" onclick="filterPlayersByFavoriteOpening()">
+<p><input type="button" value="Filter" onclick="filterPlayersByFavoriteOpening()"></p>
 </form>
 
 <form id='search_Players' action='' method=''>
