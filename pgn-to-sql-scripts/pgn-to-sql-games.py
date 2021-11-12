@@ -26,7 +26,7 @@ def values_row (game):
 		if hasattr(game, field):
 			val = getattr(game, field)
 			if field in ['white', 'black']:
-				val = '(SELECT playerID from players WHERE playerID=\'' + val + '\')'
+				val = '(SELECT player_id from players WHERE player_id=\'' + val + '\')'
 				vals += val + ', '
 			else:
 				vals += '\'' + val.replace('\'', '\\\'') + '\', '

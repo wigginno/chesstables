@@ -16,7 +16,6 @@
 
 import pgn
 import sys
-import hashlib
 
 fields = ['player_id', 'rating_name', 'favorite_opening']
 
@@ -32,6 +31,7 @@ def elo_to_rating_name(elo):
 	
 	return ratings[i]
 
+# 
 def values_row (game):
 	white_val = '    (\''
 	black_val = '    (\''
