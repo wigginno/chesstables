@@ -16,10 +16,14 @@
     <p>Black player's name: <input type="text" name="black_player"><br></p>
     <p>White player's name: <input type="text" name="white_player"><br></p>
     <p>Result: <select name="result">
-        <option value=""></option>
+        <option value="White wins (1-0)">White wins (1-0)</option>
+        <option value="Black wins (0-1)">Black wins (0-1)</option>
+        <option value="Stalemate (1/2-1/2)">Stalemate (1/2-1/2)</option>
     </select><br></p>
     <p>Opening: <select name="opening_id">
-        <option value=""></option>
+        {% for opening in openings %}
+        <option value="{{opening}}">{{opening}}</option>
+        {% endfor %}
     </select><br></p>
     <input type="submit" value="Submit">
  </form>
@@ -29,8 +33,10 @@
 <form id='filter_games_by_opening' action='' method=''>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Filter by favorite_opening </label>
-    <select id='opening_filter' name="opening_id"> 
-        <option value=""></option>
+    <select id='opening_filter' name="opening_id">
+        {% for opening in openings %}
+        <option value="{{opening}}">{{opening}}</option>
+        {% endfor %}
     </select><br>
     <p><input type="button" value="Filter" onclick="filterGamesByOpening()"></p>
 </form>
@@ -46,21 +52,21 @@
 <table border='1'>
     <thead>
         <th>game_id</th> 
-        <th>black_player</th> 
-        <th>white_player</th> 
+        <th>black_player</th>
+        <th>white_player</th>
         <th>result</th>
         <th>opening_id</th>
-    </thead> 
+    </thead>
     <tbody>
-        <tr> 
-            <td></td> 
-            <td></td> 
-            <td></td> 
-            <td></td>
-            <td></td>
+        {% for game in games %}
+        <tr>
+            {% for field in game %}
+            <td>{{field}}</td>
+            {% endfor %}
             <td><button onclick="deleteGame()">Delete</button></td>
-            <td><a href="/Games/">Update</a></td>
+            <td><button onclick="updateGame()">Update</button></td>
         </tr>
+        {% endfor %}
     </tbody> 
 </table> 
 </html>

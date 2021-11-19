@@ -13,8 +13,8 @@
 <h3>Add new opening:</h3>
 
 <form id="addopening" action="/Openings" method="post">
-    Opening name: <input type="text" name="opening_name">
-    
+    <p>Opening ID: <input type="text" name="opening_id"></p>
+    <p>Opening name: <input type="text" name="opening_name"></p>
     <input type="submit" value="Submit">
 </form>
 
@@ -26,12 +26,15 @@
         <th>opening_name</th> 
     </thead> 
     <tbody>
-        <tr> 
-            <td></td> 
-            <td></td>
+        {% for opening in openings %}
+        <tr>
+            {% for field in opening %}
+            <td>{{field}}</td>
+            {% endfor %}
             <td><button onclick="deleteOpening()">Delete</button></td>
-            <td><a href="/Players/">Update</a></td>
+            <td><button onclick="updateOpening()">Update</button></td>
         </tr>
+        {% endfor %}
     </tbody> 
 </table> 
 </html>

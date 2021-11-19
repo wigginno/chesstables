@@ -13,20 +13,25 @@
 <h3>Add new player:</h3>
 
 <p><form id="addplayer" action="/Players" method="post">
-<p>Player's name: <input type="text" name="player_name"><br></p>
-<p>Player's rating: <input type="text" name="rating_name"><br></p>
-<p>Favorite opening: <select name="favorite_opening"></p>
-        <option value=""></option>
+    <p>Player's name: <input type="text" name="player_name"><br></p>
+    <p>Player's rating: <input type="text" name="rating_name"><br></p>
+    <p>Favorite opening: <select name="favorite_opening"></p>
+        {% for opening in openings %}
+        <option value="{{opening}}">{{opening}}</option>
+        {% endfor %}
     </select><br>
-<p><input type="submit" value="Submit"></p>
- </form></p>
+    <p><input type="submit" value="Submit"></p>
+</form>
+</p>
 <br/>
 
 <form id='filter_Players' action='' method=''>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Filter by favorite_opening </label>
     <select id='favorite_opening_filter' name="favorite_opening"> 
-        <option value=""></option>
+        {% for opening in openings %}
+        <option value="{{opening}}">{{opening}}</option>
+        {% endfor %}
     </select><br>
 <p><input type="button" value="Filter" onclick="filterPlayersByFavoriteOpening()"></p>
 </form>
@@ -42,19 +47,19 @@
 <table border='1'>
     <thead> 
         <th>player_id</th> 
-        <th>player_name</th> 
         <th>rating_name</th> 
         <th>favorite_opening</th>
     </thead> 
     <tbody>
-        <tr> 
-            <td></td> 
-            <td></td> 
-            <td></td> 
-            <td></td> 
+        {% for player in players %}
+        <tr>
+            {% for field in player %}
+            <td>{{field}}</td>
+            {% endfor %}
             <td><button onclick="deletePlayer()">Delete</button></td>
-            <td><a href="/Players/">Update</a></td>
+            <td><button onclick="updatePlayer()">Update</button></td>
         </tr>
+        {% endfor %}
     </tbody> 
 </table> 
 </html>

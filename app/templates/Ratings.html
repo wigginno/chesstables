@@ -25,11 +25,15 @@
         <th>rating_name</th> 
     </thead> 
     <tbody>
-        <tr> 
-            <td></td> 
+        {% for rating in ratings %}
+        <tr>
+            {% for field in rating %}
+            <td>{{field}}</td>
+            {% endfor %}
             <td><button onclick="deleteRating()">Delete</button></td>
-            <td><a href="/Ratings/">Update</a></td>
+            <td><button onclick="updateRating()">Update</button></td>
         </tr>
+        {% endfor %}
     </tbody> 
 </table> 
 </html>
