@@ -1,1 +1,1 @@
-from starter_website.webapp import webapp
+from app.webapp import webapp
