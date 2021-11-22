@@ -6,13 +6,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=Games>Games</a>
-    <a style="font-size:30px" href=Players>Players</a>
-    <a style="font-size:30px" href=Ratings>Ratings</a>
+    <a style="font-size:30px" href=games>Games</a>
+    <a style="font-size:30px" href=players>Players</a>
+    <a style="font-size:30px" href=ratings>Ratings</a>
 
-<h3>Add new opening:</h3>
-
-<form id="addopening" action="/Openings" method="post">
+<form id="addopening" action="/addopening" method="post">
+    <label>Add new opening:</label>
     <p>Opening ID: <input type="text" name="opening_id"></p>
     <p>Opening name: <input type="text" name="opening_name"></p>
     <input type="submit" value="Submit">

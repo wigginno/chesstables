@@ -6,47 +6,51 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=Players>Players</a>
-    <a style="font-size:30px" href=Openings>Openings</a>
-    <a style="font-size:30px" href=Ratings>Ratings</a>
+    <a style="font-size:30px" href=players>Players</a>
+    <a style="font-size:30px" href=openings>Openings</a>
+    <a style="font-size:30px" href=ratings>Ratings</a>
 
-<h3>Add new game:</h3>
-
-<p><form id="addgame" action="/Games" method="post">
+<p><form id="addgame" action="/addgame" method="post">
+    <label> Add new game </label>
+    <p>Note: To add a game with a new player, first add the player to the database (from the players page).</p>
+    <p>      To see a newly added game, navigate to the last page.</p>
     <p>Black player's name: <input type="text" name="black_player"><br></p>
     <p>White player's name: <input type="text" name="white_player"><br></p>
-    <p>Result: <select name="result">
-        <option value="White wins (1-0)">White wins (1-0)</option>
-        <option value="Black wins (0-1)">Black wins (0-1)</option>
-        <option value="Stalemate (1/2-1/2)">Stalemate (1/2-1/2)</option>
+    <p>Result: <select id="result" name="result">
+        <option value="1-0">White wins (1-0)</option>
+        <option value="0-1">Black wins (0-1)</option>
+        <option value="1/2-1/2">Stalemate (1/2-1/2)</option>
     </select><br></p>
-    <p>Opening: <select name="opening_id">
+    <p>Opening: <select id="opening_id" name="opening_id">
         {% for opening in openings %}
         <option value="{{opening}}">{{opening}}</option>
         {% endfor %}
     </select><br></p>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Add game">
  </form>
 </p>
 <br/>
 
-<form id='filter_games_by_opening' action='' method=''>
-<!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Filter by favorite_opening </label>
-    <select id='opening_filter' name="opening_id">
+<p><form id='filtergames' action='/filtergames' method='get'>
+    <label> Filter by opening </label>
+    <select id='opening_id' name="opening_id">
+        <option value=""></option>
         {% for opening in openings %}
         <option value="{{opening}}">{{opening}}</option>
         {% endfor %}
     </select><br>
-    <p><input type="button" value="Filter" onclick="filterGamesByOpening()"></p>
-</form>
+    <label> Filter games by player name </label>
+    <input id='player_id' type='text' name='player_id' value=''>
+    <p><input type="submit" value="Filter games"></p>
+</form></p>
 
-<form id='search_games_by_player' action='' method=''>
-<!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Search game by player name:</label>
-    <input id='player_name_search_string' type='text' name='player_name_search_string' value=''>
-    <input type="button" value="Search" onclick="searchGamesByPlayerName()">
-</form>
+<br/>
+
+<p><form id='page_navigation' action='/games' method='get'>
+    <label> Page {{page_number}} of {{last_page}}</label>
+    <input id='page' type='text' name='page' value=''>
+    <p><input type="submit" value="Go to page"></p>
+</form></p>
 
 <h3>Games:</h3>
 <table border='1'>

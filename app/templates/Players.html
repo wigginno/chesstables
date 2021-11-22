@@ -6,41 +6,40 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=Games>Games</a>
-    <a style="font-size:30px" href=Openings>Openings</a>
-    <a style="font-size:30px" href=Ratings>Ratings</a>
+    <a style="font-size:30px" href=games>Games</a>
+    <a style="font-size:30px" href=openings>Openings</a>
+    <a style="font-size:30px" href=ratings>Ratings</a>
 
-<h3>Add new player:</h3>
 
-<p><form id="addplayer" action="/Players" method="post">
-    <p>Player's name: <input type="text" name="player_name"><br></p>
+
+<p><form id="addplayer" action="/addplayer" method="post">
+    <label>Add new player:</label>
+    <p>Note: To add a player with a new rating, first make sure the rating exists in the ratings table.</p>
+    <p>      To see a newly added player, find them according to their player id alphabetical order.</p>
+    <p>Player's name: <input type="text" name="player_id"><br></p>
     <p>Player's rating: <input type="text" name="rating_name"><br></p>
     <p>Favorite opening: <select name="favorite_opening"></p>
         {% for opening in openings %}
         <option value="{{opening}}">{{opening}}</option>
         {% endfor %}
     </select><br>
-    <p><input type="submit" value="Submit"></p>
+    <p><input type="submit" value="Add player"></p>
 </form>
 </p>
 <br/>
 
-<form id='filter_Players' action='' method=''>
+<form id='filterplayers' action='/filterplayers' method='get'>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Filter by favorite_opening </label>
-    <select id='favorite_opening_filter' name="favorite_opening"> 
+    <label> Filter players by favorite opening: </label>
+    <select id='favorite_opening' name="favorite_opening">
+        <option value=""></option>
         {% for opening in openings %}
         <option value="{{opening}}">{{opening}}</option>
         {% endfor %}
     </select><br>
-<p><input type="button" value="Filter" onclick="filterPlayersByFavoriteOpening()"></p>
-</form>
-
-<form id='search_Players' action='' method=''>
-<!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Search player by name:</label>
-    <input id='player_name_search_string' type='text' name='player_name_search_string' value=''>
-    <input type="button" value="Search" onclick="searchPlayersByName()">
+    <label> Filter players by name: </label>
+    <input id='player_id' type='text' name='player_id' value=''>
+    <p><input type="submit" value="Filter players"></p>
 </form>
 
 <h3>Players:</h3>
@@ -49,7 +48,7 @@
         <th>player_id</th> 
         <th>rating_name</th> 
         <th>favorite_opening</th>
-    </thead> 
+    </thead>
     <tbody>
         {% for player in players %}
         <tr>
