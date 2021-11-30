@@ -164,3 +164,107 @@ def filterplayers():
     players = execute_query(db_connection, filter_players_query).fetchall()
 
     return render_template('filterplayers.html', players=players)
+
+@webapp.route('/deleterating', methods=['POST'])
+def deleterating():
+    rating_name = request.args.get('rating_name')
+    
+    if rating_name:
+        db_connection = connect_to_database()
+        del_rating_query = ""
+        execute_query(db_connection, del_rating_query)
+
+    return redirect('/ratings')
+
+@webapp.route('/deleteopening', methods=['POST'])
+def deleteopening():
+    opening_id = request.args.get('opening_id')
+    
+    if opening_id:
+        db_connection = connect_to_database()
+        del_opening_query = ""
+        execute_query(db_connection, del_opening_query)
+
+    return redirect('/openings')
+    
+
+@webapp.route('/deleteplayer', methods=['POST'])
+def deleteplayer():
+    player_id = request.args.get('player_id')
+
+    if player_id:
+        db_connection = connect_to_database()
+        del_player_query = ""
+        execute_query(db_connection, del_player_query)
+
+    return redirect('/players')
+
+@webapp.route('/deletegame', methods=['POST'])
+def deletegame():
+    game_id = request.args.get('game_id')
+
+    if game_id:
+        db_connection = connect_to_database()
+        del_game_query = ""
+        execute_query(db_connection, del_game_query)
+
+    return redirect('/games')
+
+@webapp.route('/updaterating', methods=['POST'])
+def updaterating():
+    rating_name = request.args.get('rating_name')
+    
+    if rating_name:
+        db_connection = connect_to_database()
+        update_rating_name_query = ""
+        execute_query(db_connection, update_rating_name_query)
+
+    return redirect('/ratings')
+
+@webapp.route('/updateopening', methods=['POST'])
+def updateopening():
+    opening_id = request.args.get('opening_id')
+    opening_name = request.args.get('opening_name')
+
+    if opening_id:
+        db_connection = connect_to_database()
+        update_opening_id_query = ""
+        execute_query(db_connection, update_opening_id_query)
+
+    if opening_name:
+        db_connection = connect_to_database()
+        update_opening_name_query = ""
+        execute_query(db_connection, update_opening_name_query)
+    
+    return redirect('/openings')
+
+@webapp.route('/updateplayer', methods=['POST'])
+def updateplayer():
+    player_id = request.args.get('player_id')
+    rating_name = request.args.get('rating_name')
+    favorite_opening = request.args.get('favorite_opening')
+
+    if player_id:
+        db_connection = connect_to_database()
+        update_player_id_query = ""
+        execute_query(db_connection, update_player_id_query)
+    if rating_name:
+        db_connection = connect_to_database()
+        update_rating_name_query = "UPDATE openings SET rating_name=%s WHERE rating_name="
+        execute_query(db_connection, update_rating_name_query)
+    if favorite_opening:
+        db_connection = connect_to_database()
+        update_favorite_opening_query = ""
+        execute_query(db_connection, update_favorite_opening_query)
+
+    return redirect('/players')
+
+@webapp.route('/updategame', methods=['POST'])
+def updategame():
+    game_id = request.args.get('game_id')
+    black_player = request.args.get('black_player')
+    white_player = request.args.get('white_player')
+    result = request.args.get('result')
+    opening_id = request.args.get('opening_id')
+
+    return redirect('/games')
