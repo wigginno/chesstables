@@ -238,7 +238,7 @@ def updaterating():
     if new_rating_name:
         db_connection = connect_to_database()
         update_rating_name_query = "UPDATE ratings SET rating_name='%s'\
-         WHERE rating_name='%s';" % rating_name
+         WHERE rating_name='%s';" % (new_rating_name, rating_name)
         try:
             execute_query(db_connection, update_rating_name_query)
         except:
@@ -260,6 +260,7 @@ def updateopening():
             execute_query(db_connection, update_opening_id_query)
         except:
             pass
+        opening_id = new_opening_id
 
     if opening_name:
         db_connection = connect_to_database()
@@ -287,6 +288,7 @@ def updateplayer():
             execute_query(db_connection, update_player_id_query)
         except:
             pass
+        player_id = new_player_id
 
     if rating_name:
         db_connection = connect_to_database()

@@ -22,7 +22,7 @@
   <h3>Update {{entity_name}}: {{id}}</h3>
 
   <form id="updateentry" action="/update{{entity_name}}" method="post">
-    <input type="hidden" name="id" value={{id}}>
+    <input type="hidden" name="id" value="{{id}}">
     {% for attribute in attributes %}
     <p>{{attribute}}:</p>
     {% if attribute=="game_id" %}
