@@ -9,8 +9,7 @@
     <a style="font-size:30px" href=games>Games</a>
     <a style="font-size:30px" href=openings>Openings</a>
     <a style="font-size:30px" href=ratings>Ratings</a>
-
-
+    
 
 <p><form id="addplayer" action="/addplayer" method="post">
     <label>Add new player:</label>
@@ -20,7 +19,7 @@
     <p>Player's rating: <input type="text" name="rating_name"><br></p>
     <p>Favorite opening: <select name="favorite_opening"></p>
         {% for opening in openings %}
-        <option value="{{opening}}">{{opening}}</option>
+        <option value="{{opening.opening_id}}">{{opening.opening_id}}</option>
         {% endfor %}
     </select><br>
     <p><input type="submit" value="Add player"></p>
@@ -29,12 +28,11 @@
 <br/>
 
 <form id='filterplayers' action='/filterplayers' method='get'>
-<!--- this form does not submit directly, the button handles all the interaction with backend -->
     <label> Filter players by favorite opening: </label>
     <select id='favorite_opening' name="favorite_opening">
         <option value=""></option>
         {% for opening in openings %}
-        <option value="{{opening}}">{{opening}}</option>
+        <option value={{opening.opening_id}}>{{opening.opening_id}}</option>
         {% endfor %}
     </select><br>
     <label> Filter players by name: </label>
@@ -52,11 +50,11 @@
     <tbody>
         {% for player in players %}
         <tr>
-            {% for field in player %}
-            <td>{{field}}</td>
-            {% endfor %}
-            <td><button onclick="deletePlayer()">Delete</button></td>
-            <td><button onclick="updatePlayer()">Update</button></td>
+            <td>{{player.player_id}}</td>
+            <td>{{player.rating_name}}</td>
+            <td>{{player.favorite_opening}}</td>
+            <td><a href="/deleteplayer?player_id={{player.player_id}}">Delete</a></td>
+            <td><a href="/updateplayerform?player_id={{player.player_id}}">Update</a></td>
         </tr>
         {% endfor %}
     </tbody> 

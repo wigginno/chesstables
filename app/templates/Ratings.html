@@ -27,11 +27,9 @@
     <tbody>
         {% for rating in ratings %}
         <tr>
-            {% for field in rating %}
-            <td>{{field}}</td>
-            {% endfor %}
-            <td><button onclick="deleteRating()">Delete</button></td>
-            <td><button onclick="updateRating()">Update</button></td>
+            <td>{{rating.rating_name}}</td>
+            <td><a href="/deleterating?rating_name={{rating.rating_name}}">Delete</a></td>
+            <td><a href="/updateratingform?rating_name={{rating.rating_name}}">Update</a></td>
         </tr>
         {% endfor %}
     </tbody> 

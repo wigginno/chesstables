@@ -20,18 +20,17 @@
 
 <h3>Openings:</h3>
 <table border='1'>
-    <thead> 
+    <thead>
         <th>opening_id</th> 
         <th>opening_name</th> 
-    </thead> 
+    </thead>
     <tbody>
         {% for opening in openings %}
         <tr>
-            {% for field in opening %}
-            <td>{{field}}</td>
-            {% endfor %}
-            <td><button onclick="deleteOpening()">Delete</button></td>
-            <td><button onclick="updateOpening()">Update</button></td>
+            <td>{{opening.opening_id}}</td>
+            <td>{{opening.opening_name}}</td>
+            <td><a href="/deleteopening?opening_id={{opening.opening_id}}">Delete</a></td>
+            <td><a href="/updateopeningform?opening_id={{opening.opening_id}}">Update</a></td>
         </tr>
         {% endfor %}
     </tbody> 

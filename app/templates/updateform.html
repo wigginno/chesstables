@@ -1,0 +1,44 @@
+<html>
+
+<!-- Bootstrap & JQuery -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+  <style>
+  input[name="id"] {
+    display: none;  
+  }
+  </style>
+</head>
+
+    <a style="font-size:30px" href=/>Index</a>
+    <a style="font-size:30px" href=games>Games</a>
+    <a style="font-size:30px" href=players>Players</a>
+    <a style="font-size:30px" href=openings>Openings</a>
+    <a style="font-size:30px" href=ratings>Ratings</a>
+
+  <h3>Update {{entity_name}}: {{id}}</h3>
+
+  <form id="updateentry" action="/update{{entity_name}}" method="post">
+    <input type="hidden" name="id" value={{id}}>
+    {% for attribute in attributes %}
+    <p>{{attribute}}:</p>
+    {% if attribute=="game_id" %}
+    <input type="text" name="game_id" value="{{id}}" readonly>
+    {% elif attribute=="favorite_opening" or attribute=="opening_id" %}
+    <select name="{{attribute}}">
+    <option value=""></option>
+    {% for opening in openings %}
+    <option value={{opening.opening_id}}>{{opening.opening_id}}</option>
+    {% endfor %}
+    </select>
+    {% else %}
+    <input type="text" name={{attribute}}></p>
+    {% endif %}
+    {% endfor %}
+    <p><input type="submit" value="Submit"></p>
+  </form>
+
+</html>

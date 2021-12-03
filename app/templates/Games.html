@@ -23,7 +23,7 @@
     </select><br></p>
     <p>Opening: <select id="opening_id" name="opening_id">
         {% for opening in openings %}
-        <option value="{{opening}}">{{opening}}</option>
+        <option value="{{opening.opening_id}}">{{opening.opening_id}}</option>
         {% endfor %}
     </select><br></p>
     <input type="submit" value="Add game">
@@ -36,7 +36,7 @@
     <select id='opening_id' name="opening_id">
         <option value=""></option>
         {% for opening in openings %}
-        <option value="{{opening}}">{{opening}}</option>
+        <option value={{opening.opening_id}}>{{opening.opening_id}}</option>
         {% endfor %}
     </select><br>
     <label> Filter games by player name </label>
@@ -64,11 +64,13 @@
     <tbody>
         {% for game in games %}
         <tr>
-            {% for field in game %}
-            <td>{{field}}</td>
-            {% endfor %}
-            <td><button onclick="deleteGame()">Delete</button></td>
-            <td><button onclick="updateGame()">Update</button></td>
+            <td>{{game.game_id}}</td>
+            <td>{{game.white_player}}</td>
+            <td>{{game.black_player}}</td>
+            <td>{{game.result}}</td>
+            <td>{{game.opening_id}}</td>
+            <td><a href="/deletegame?game_id={{game.game_id}}">Delete</a></td>
+            <td><a href="/updategameform?game_id={{game.game_id}}">Update</a></td>
         </tr>
         {% endfor %}
     </tbody> 
