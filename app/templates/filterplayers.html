@@ -1,24 +1,38 @@
 <html>
 
-<!-- Bootstrap & JQuery -->
+<!-- Styling -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='formatting.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=games>Games</a>
-    <a style="font-size:30px" href=players>Players</a>
-    <a style="font-size:30px" href=openings>Openings</a>
-    <a style="font-size:30px" href=ratings>Ratings</a>
 
+<body>
+
+    <div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+        <div data-reactroot="" class="resolved" style="all: initial;"></div>
+    </div>
+
+    <div class="w3-bar w3-black w3-card">
+        <a href="/" class="w3-bar-item w3-button w3-padding-large">Index</a>
+        <a href="games" class="w3-bar-item w3-button w3-padding-large">Games</a>
+        <a href="players" class="w3-bar-item w3-button w3-padding-large">Players</a>
+        <a href="openings" class="w3-bar-item w3-button w3-padding-large">Openings</a>
+        <a href="ratings" class="w3-bar-item w3-button w3-padding-large">Ratings</a>
+    </div>
+
+    <div class="back-ground">
     <h3>Players in filter:</h3>
-    <table border='1'>
+    <table style='margin: auto;' border='1'>
         <thead> 
-            <th>player_id</th> 
-            <th>rating_name</th> 
-            <th>favorite_opening</th>
+            <th style='width: 120px'>player_id</th> 
+            <th style='width: 140px'>rating_name</th> 
+            <th style='width: 160px'>favorite_opening</th>
         </thead>
-        <tbody style="margin: auto;">
+        <tbody style="margin-left: 10px;">
             {% for player in players %}
             <tr>
                 <td>{{player[0]}}</td>

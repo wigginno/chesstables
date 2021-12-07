@@ -3,6 +3,9 @@ from flask import request, redirect
 from db_connector import connect_to_database, execute_query
 webapp = Flask(__name__)
 
+host='0.0.0.0'
+port=1129
+
 webapp.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 # TODO - fix issue on update player:
@@ -398,7 +401,5 @@ def get_openings(db_connection):
     openings = execute_query(db_connection, get_openings_query).fetchall()
     return openings
 
-# update form variables:
-#   entity_name
-#   id
-#   attributes
+if __name__ == "__main__":
+    webapp.run(host=host, port=port)
