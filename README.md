@@ -8,9 +8,9 @@ pip3 install --upgrade pip
 pip install -r requirements.txt
 
 Start web app on port xxxx:
+Change port number in app/webapp.py to any unused port
 source ./venv/bin/activate
-export FLASK_APP=run.py
-python -m flask run -h 0.0.0.0 -p xxxx --reload
+python app/webapp.py
 
-Run web app forever on port xxxx with gunicorn:
-gunicorn run:webapp -b 0.0.0.0:xxxx -D
+Run web app forever (requires the npm package "forever"):
+forever start -c python app/webapp.py
