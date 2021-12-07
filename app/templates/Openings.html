@@ -1,38 +1,55 @@
 <html>
 
-<!-- Bootstrap & JQuery -->
+<!-- Styling -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='formatting.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=games>Games</a>
-    <a style="font-size:30px" href=players>Players</a>
-    <a style="font-size:30px" href=ratings>Ratings</a>
 
-<form id="addopening" action="/addopening" method="post">
-    <label>Add new opening:</label>
-    <p>Opening ID: <input type="text" name="opening_id"></p>
-    <p>Opening name: <input type="text" name="opening_name"></p>
-    <input type="submit" value="Submit">
-</form>
+<body>
 
+    <div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+        <div data-reactroot="" class="resolved" style="all: initial;"></div>
+    </div>
 
-<h3>Openings:</h3>
-<table border='1'>
-    <thead>
-        <th>opening_id</th> 
-        <th>opening_name</th> 
-    </thead>
-    <tbody>
-        {% for opening in openings %}
-        <tr>
-            <td>{{opening.opening_id}}</td>
-            <td>{{opening.opening_name}}</td>
-            <td><a href="/deleteopening?opening_id={{opening.opening_id}}">Delete</a></td>
-            <td><a href="/updateopeningform?opening_id={{opening.opening_id}}">Update</a></td>
-        </tr>
-        {% endfor %}
-    </tbody> 
-</table> 
+    <div class="w3-bar w3-black w3-card">
+        <a href="/" class="w3-bar-item w3-button w3-padding-large">Index</a>
+        <a href="games" class="w3-bar-item w3-button w3-padding-large">Games</a>
+        <a href="players" class="w3-bar-item w3-button w3-padding-large">Players</a>
+        <a href="openings" class="w3-bar-item w3-button w3-padding-large"><b>Openings</b></a>
+        <a href="ratings" class="w3-bar-item w3-button w3-padding-large">Ratings</a>
+    </div>
+
+    <div class="back-ground">
+        <p><form style='margin-left: 10px;' id="addopening" action="/addopening" method="post">
+            <label>Add new opening:</label>
+            <p>Opening ID: <input type="text" name="opening_id"></p>
+            <p>Opening name: <input type="text" name="opening_name"></p>
+            <input type="submit" value="Submit">
+        </form>
+
+        <h3 style='margin-left: 10px'>Openings:</h3>
+        <table class="styled-table" style='margin: auto;' border='1'>
+            <thead>
+                <th>opening_id</th> 
+                <th style='width: 130px'>opening_name</th> 
+            </thead>
+            <tbody style="margin: auto;">
+                {% for opening in openings %}
+                <tr>
+                    <td style='width: 100px'>{{opening[0]}}</td>
+                    <td style='width: 100px'>{{opening[1]}}</td>
+                    <td style='width: 40px'><button onclick="location.href='/deleteopening?opening_id={{opening[0]}}'">Delete</button></td>
+                    <td style='width: 40px'><button onclick="location.href='/updateopeningform?opening_id={{opening[0]}}'">Update</button></td>
+                </tr>
+                {% endfor %}
+            </tbody> 
+        </table>
+    </div>
+</body>
+
 </html>

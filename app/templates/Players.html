@@ -1,62 +1,76 @@
 <html>
 
-<!-- Bootstrap & JQuery -->
+<!-- Styling -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='formatting.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=games>Games</a>
-    <a style="font-size:30px" href=openings>Openings</a>
-    <a style="font-size:30px" href=ratings>Ratings</a>
-    
 
-<p><form id="addplayer" action="/addplayer" method="post">
-    <label>Add new player:</label>
-    <p>Note: To add a player with a new rating, first make sure the rating exists in the ratings table.</p>
-    <p>      To see a newly added player, find them according to their player id alphabetical order.</p>
-    <p>Player's name: <input type="text" name="player_id"><br></p>
-    <p>Player's rating: <input type="text" name="rating_name"><br></p>
-    <p>Favorite opening: <select name="favorite_opening"></p>
-        {% for opening in openings %}
-        <option value="{{opening.opening_id}}">{{opening.opening_id}}</option>
-        {% endfor %}
-    </select><br>
-    <p><input type="submit" value="Add player"></p>
-</form>
-</p>
-<br/>
+<body>
 
-<form id='filterplayers' action='/filterplayers' method='get'>
-    <label> Filter players by favorite opening: </label>
-    <select id='favorite_opening' name="favorite_opening">
-        <option value=""></option>
-        {% for opening in openings %}
-        <option value={{opening.opening_id}}>{{opening.opening_id}}</option>
-        {% endfor %}
-    </select><br>
-    <label> Filter players by name: </label>
-    <input id='player_id' type='text' name='player_id' value=''>
-    <p><input type="submit" value="Filter players"></p>
-</form>
+    <div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+        <div data-reactroot="" class="resolved" style="all: initial;"></div>
+    </div>
 
-<h3>Players:</h3>
-<table border='1'>
-    <thead> 
-        <th>player_id</th> 
-        <th>rating_name</th> 
-        <th>favorite_opening</th>
-    </thead>
-    <tbody>
-        {% for player in players %}
-        <tr>
-            <td>{{player.player_id}}</td>
-            <td>{{player.rating_name}}</td>
-            <td>{{player.favorite_opening}}</td>
-            <td><a href="/deleteplayer?player_id={{player.player_id}}">Delete</a></td>
-            <td><a href="/updateplayerform?player_id={{player.player_id}}">Update</a></td>
-        </tr>
-        {% endfor %}
-    </tbody> 
-</table> 
+    <div class="w3-bar w3-black w3-card">
+        <a href="/" class="w3-bar-item w3-button w3-padding-large">Index</a>
+        <a href="games" class="w3-bar-item w3-button w3-padding-large">Games</a>
+        <a href="players" class="w3-bar-item w3-button w3-padding-large"><b>Players</b></a>
+        <a href="openings" class="w3-bar-item w3-button w3-padding-large">Openings</a>
+        <a href="ratings" class="w3-bar-item w3-button w3-padding-large">Ratings</a>
+    </div>
+
+    <div class="back-ground">
+        <p><form style='margin-left: 10px;' id="addplayer" action="/addplayer" method="post">
+            <label>Add new player:</label>
+            <p>Note: To add a player with a new rating, first make sure the rating exists in the ratings table.</p>
+            <p>      To see a newly added player, find them according to their player id alphabetical order.</p>
+            <p>Player's name: <input type="text" name="player_id"><br></p>
+            <p>Player's rating: <input type="text" name="rating_name"><br></p>
+            <p>Favorite opening: <select name="favorite_opening"></p>
+                {% for opening in openings %}
+                <option value="{{opening[0]}}">{{opening[0]}}</option>
+                {% endfor %}
+            </select><br>
+            <p><input type="submit" value="Add player"></p>
+        </form></p>
+
+        <p><form style='margin-left: 10px;' id='filterplayers' action='/filterplayers' method='get'>
+            <label> Filter players by favorite opening: </label>
+            <select id='favorite_opening' name="favorite_opening">
+                <option value=""></option>
+                {% for opening in openings %}
+                <option value={{opening[0]}}>{{opening[0]}}</option>
+                {% endfor %}
+            </select><br>
+            <label> Filter players by name: </label>
+            <input id='player_id' type='text' name='player_id' value=''>
+            <p><input type="submit" value="Filter players"></p>
+        </form></p>
+
+        <h3>Players:</h3>
+        <table class="styled-table" style='margin: auto;' border='1'>
+            <thead> 
+                <th>player_id</th> 
+                <th>rating_name</th> 
+                <th>favorite_opening</th>
+            </thead>
+            <tbody style="margin: auto;">
+                {% for player in players %}
+                <tr>
+                    <td>{{player[0]}}</td>
+                    <td>{{player[1]}}</td>
+                    <td>{{player[2]}}</td>
+                    <td style='width: 40px'><button onclick="location.href='/deleteplayer?player_id={{player[0]}}'">Delete</button></td>
+                    <td style='width: 40px'><button onclick="location.href='/updateplayerform?player_id={{player[0]}}'">Update</button></td>
+                </tr>
+                {% endfor %}
+            </tbody> 
+        </table>
+    </div>
+</body>
 </html>

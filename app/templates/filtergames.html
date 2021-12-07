@@ -20,14 +20,16 @@
             <th>result</th>
             <th>opening_id</th>
         </thead>
-        <tbody>
+        <tbody style="margin: auto;">
             {% for game in games %}
             <tr>
-                {% for field in game %}
-                <td>{{field}}</td>
-                {% endfor %}
-                <td><button onclick="deleteGame()">Delete</button></td>
-                <td><button onclick="updateGame()">Update</button></td>
+                <td style='width: 80px'>{{game[0]}}</td>
+                <td style='width: 80px'>{{game[1]}}</td>
+                <td style='width: 80px'>{{game[2]}}</td>
+                <td style='width: 80px'>{{game[3]}}</td>
+                <td style='width: 80px'>{{game[4]}}</td>
+                <td style='width: auto'><button onclick="location.href='/deletegame?game_id={{game[0]}}'">Delete</button></td>
+                <td style='width: auto'><button onclick="location.href='/updategameform?game_id={{game[0]}}'">Update</button></td>
             </tr>
             {% endfor %}
         </tbody>

@@ -18,10 +18,10 @@ def index():
 def Games():
     db_connection = connect_to_database()
     next_game_id_query = "SELECT AUTO_INCREMENT FROM information_schema.tables\
-         WHERE table_schema = \"chesstables\" and table_name = \"games\";"
+         WHERE table_schema = \"cs340_wigginno\" and table_name = \"games\";"
     
     next_game_id = execute_query(db_connection, next_game_id_query).fetchall()
-    last_game_id = next_game_id[0]["AUTO_INCREMENT"] - 1
+    last_game_id = next_game_id[0][0] - 1
     
     last_page = last_game_id // 500 + 1
     page_number = int(request.args.get('page', 1))
@@ -65,7 +65,7 @@ def Ratings():
 def addrating():
     db_connection = connect_to_database()
     rating_name = request.form['rating_name']
-    add_rating_query = "INSERT INTO ratings (rating_name) VALUES (%s);"\
+    add_rating_query = "INSERT INTO ratings (rating_name) VALUES (\'%s\');"\
          % (rating_name)
     try:
         execute_query(db_connection, add_rating_query)
@@ -280,7 +280,7 @@ def updateplayer():
     rating_name = request.form.get('rating_name')
     favorite_opening = request.form.get('favorite_opening')
 
-    if player_id:
+    if new_player_id:
         db_connection = connect_to_database()
         update_player_id_query = "UPDATE players SET player_id='%s'\
              WHERE player_id='%s';" % (new_player_id, player_id)

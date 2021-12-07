@@ -1,78 +1,93 @@
 <html>
 
-<!-- Bootstrap & JQuery -->
+<!-- Styling -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='formatting.css') }}">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <a style="font-size:30px" href=/>Index</a>
-    <a style="font-size:30px" href=players>Players</a>
-    <a style="font-size:30px" href=openings>Openings</a>
-    <a style="font-size:30px" href=ratings>Ratings</a>
 
-<p><form id="addgame" action="/addgame" method="post">
-    <label> Add new game </label>
-    <p>Note: To add a game with a new player, first add the player to the database (from the players page).</p>
-    <p>      To see a newly added game, navigate to the last page.</p>
-    <p>Black player's name: <input type="text" name="black_player"><br></p>
-    <p>White player's name: <input type="text" name="white_player"><br></p>
-    <p>Result: <select id="result" name="result">
-        <option value="1-0">White wins (1-0)</option>
-        <option value="0-1">Black wins (0-1)</option>
-        <option value="1/2-1/2">Stalemate (1/2-1/2)</option>
-    </select><br></p>
-    <p>Opening: <select id="opening_id" name="opening_id">
-        {% for opening in openings %}
-        <option value="{{opening.opening_id}}">{{opening.opening_id}}</option>
-        {% endfor %}
-    </select><br></p>
-    <input type="submit" value="Add game">
- </form>
-</p>
-<br/>
+<body>
 
-<p><form id='filtergames' action='/filtergames' method='get'>
-    <label> Filter by opening </label>
-    <select id='opening_id' name="opening_id">
-        <option value=""></option>
-        {% for opening in openings %}
-        <option value={{opening.opening_id}}>{{opening.opening_id}}</option>
-        {% endfor %}
-    </select><br>
-    <label> Filter games by player name </label>
-    <input id='player_id' type='text' name='player_id' value=''>
-    <p><input type="submit" value="Filter games"></p>
-</form></p>
+    <div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+        <div data-reactroot="" class="resolved" style="all: initial;"></div>
+    </div>
 
-<br/>
+    <div class="w3-bar w3-black w3-card">
+        <a href="/" class="w3-bar-item w3-button w3-padding-large">Index</a>
+        <a href="games" class="w3-bar-item w3-button w3-padding-large"><b>Games</b></a>
+        <a href="players" class="w3-bar-item w3-button w3-padding-large">Players</a>
+        <a href="openings" class="w3-bar-item w3-button w3-padding-large">Openings</a>
+        <a href="ratings" class="w3-bar-item w3-button w3-padding-large">Ratings</a>
+    </div>
 
-<p><form id='page_navigation' action='/games' method='get'>
-    <label> Page {{page_number}} of {{last_page}}</label>
-    <input id='page' type='text' name='page' value=''>
-    <p><input type="submit" value="Go to page"></p>
-</form></p>
+    <div class="back-ground">
+        <p><form style='margin-left: 40px' id="addgame" action="/addgame" method="post">
+            <label> Add new game </label>
+            <p>Note: To add a game with a new player, first add the player to the database (from the players page).</p>
+            <p>      To see a newly added game, navigate to the last page.</p>
+            <p>Black player's name: <input type="text" name="black_player"><br></p>
+            <p>White player's name: <input type="text" name="white_player"><br></p>
+            <p>Result: <select id="result" name="result">
+                <option value="1-0">White wins (1-0)</option>
+                <option value="0-1">Black wins (0-1)</option>
+                <option value="1/2-1/2">Stalemate (1/2-1/2)</option>
+            </select><br></p>
+            <p>Opening: <select id="opening_id" name="opening_id">
+                {% for opening in openings %}
+                <option value="{{opening[0]}}">{{opening[0]}}</option>
+                {% endfor %}
+            </select><br></p>
+            <input type="submit" value="Add game">
+        </form></p>
 
-<h3>Games:</h3>
-<table border='1'>
-    <thead>
-        <th>game_id</th> 
-        <th>black_player</th>
-        <th>white_player</th>
-        <th>result</th>
-        <th>opening_id</th>
-    </thead>
-    <tbody>
-        {% for game in games %}
-        <tr>
-            <td>{{game.game_id}}</td>
-            <td>{{game.white_player}}</td>
-            <td>{{game.black_player}}</td>
-            <td>{{game.result}}</td>
-            <td>{{game.opening_id}}</td>
-            <td><a href="/deletegame?game_id={{game.game_id}}">Delete</a></td>
-            <td><a href="/updategameform?game_id={{game.game_id}}">Update</a></td>
-        </tr>
-        {% endfor %}
-    </tbody> 
-</table> 
+        <p style="margin-left: 25%;"></p>
+        <p><form style='margin-left: 40px;' id='filtergames' action='/filtergames' method='get'>
+            <label> Filter by opening </label>
+            <select id='opening_id' name="opening_id">
+                <option value=""></option>
+                {% for opening in openings %}
+                <option value={{opening[0]}}>{{opening[0]}}</option>
+                {% endfor %}
+            </select><br>
+            <label> Filter games by player name </label>
+            <input id='player_id' type='text' name='player_id' value=''>
+            <p><input type="submit" value="Filter games"></p>
+        </form></p>
+
+
+        <p><form style='margin-left: 40px;' id='page_navigation' action='/games' method='get'>
+            <label> Page {{page_number}} of {{last_page}}</label>
+            <input id='page' type='text' name='page' value=''>
+            <p><input type="submit" value="Go to page"></p>
+        </form></p>
+
+        <h3 style='margin-left: 40px;'>Games:</h3>
+        <table class="styled-table" style='margin: auto;' border='1'>
+            <thead>
+                <th>game_id</th> 
+                <th>black_player</th>
+                <th>white_player</th>
+                <th style='width: 80px'>result</th>
+                <th style='width: 100px'>opening_id</th>
+            </thead>
+            <tbody style="margin: auto;">
+                {% for game in games %}
+                <tr>
+                    <td style='width: 80px'>{{game[0]}}</td>
+                    <td style='width: 80px'>{{game[1]}}</td>
+                    <td style='width: 80px'>{{game[2]}}</td>
+                    <td style='width: 80px'>{{game[3]}}</td>
+                    <td style='width: 80px'>{{game[4]}}</td>
+                    <td style='width: auto'><button onclick="location.href='/deletegame?game_id={{game[0]}}'">Delete</button></td>
+                    <td style='width: auto'><button onclick="location.href='/updategameform?game_id={{game[0]}}'">Update</button></td>
+                </tr>
+                {% endfor %}
+            </tbody> 
+        </table> 
+    </div>
+</body>
 </html>

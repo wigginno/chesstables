@@ -18,17 +18,17 @@
             <th>rating_name</th> 
             <th>favorite_opening</th>
         </thead>
-        <tbody>
+        <tbody style="margin: auto;">
             {% for player in players %}
             <tr>
-                {% for field in player %}
-                <td>{{field}}</td>
-                {% endfor %}
-                <td><button onclick="deletePlayer()">Delete</button></td>
-                <td><button onclick="updatePlayer()">Update</button></td>
+                <td>{{player[0]}}</td>
+                <td>{{player[1]}}</td>
+                <td>{{player[2]}}</td>
+                <td style='width: auto'><button onclick="location.href='/deleteplayer?player_id={{player[0]}}'">Delete</button></td>
+                <td style='width: auto'><button onclick="location.href='/updateplayerform?player_id={{player[0]}}'">Update</button></td>
             </tr>
             {% endfor %}
         </tbody> 
-    </table> 
+    </table>
 
 </html>
